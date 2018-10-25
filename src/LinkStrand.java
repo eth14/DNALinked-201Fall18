@@ -21,7 +21,6 @@ public class LinkStrand implements IDnaStrand{
 	private Node myFirst,myLast;
 	private long mySize;
 	private int myAppends;
-	private StringBuilder mySequence;
 	private int myIndex;
 	private int myLocalIndex;
 	private Node myCurrent;
@@ -72,8 +71,8 @@ public class LinkStrand implements IDnaStrand{
 		}
 		LinkStrand backwards = new LinkStrand();
 		backwards.myFirst = firstCopy;
-		backwards.myAppends = myAppends; //use this
-		backwards.mySize = mySize;		 //here too
+		backwards.myAppends = this.myAppends; //use this
+		backwards.mySize = this.mySize;		 //here too
 		Node rvsrvs = listCopy;
 		while(listCopy != null) {
 			backwards.myLast = rvsrvs.next;
@@ -107,9 +106,11 @@ public class LinkStrand implements IDnaStrand{
 	}
 	
 	public String toString() {
-		while(myFirst != null) {
-			mySequence  = mySequence.append(myFirst.info);
-			myFirst = myFirst.next;
+		StringBuilder mySequence = new StringBuilder();
+		Node plachldr = myFirst;
+		while(plachldr != null) {
+			mySequence.append(plachldr.info);
+			plachldr = plachldr.next;
 		}
 		return mySequence.toString();
 	}
